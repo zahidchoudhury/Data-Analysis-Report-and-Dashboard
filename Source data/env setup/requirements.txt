@@ -1,0 +1,19 @@
+from sklearn.linear_model import LinearRegression
+
+X = df[['Unit Price','Customer Age']].fillna(0)
+y = df['Quantity']
+
+model = LinearRegression().fit(X, y)
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+
+# Dataset: predictions
+preds = model.predict(X[:10])
+print(pd.DataFrame({"Actual": y[:10].values, "Predicted": preds}))
+
+# Graph
+plt.scatter(X['Unit Price'], y, color="blue", label="Actual")
+plt.scatter(X['Unit Price'], preds, color="red", label="Predicted")
+plt.title("Regression: Unit Price vs Quantity")
+plt.legend()
+plt.show()
