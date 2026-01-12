@@ -9,10 +9,10 @@ This folder contains **three key files**:
 - **DAX Mastery (PDF)**  
   Download this PDF to access the complete documentation of DAX concepts, formulas, patterns, and explanations. It serves as a consolidated reference covering calculated columns, measures, evaluation context, filtering, iterators, time intelligence, and advanced DAX techniques.
 
-- **Power BI Model – AdventureDB**  
+- **DAX Mastery – AdventureDB**  
   Power BI report built using the AdventureDB dataset, demonstrating end-to-end sales, product, customer, and time intelligence analysis.
 
-- **Power BI Model – EMP Sales**  
+- **DAX Mastery – EMP Sales**  
   Power BI report focused on organizational hierarchy and employee sales analysis using advanced DAX patterns.
 
 ## Source Data
@@ -31,6 +31,4 @@ This source folder contains **two datasets**:
 The purpose of this folder is to provide a structured, real-world demonstration of DAX mastery, combining documented theory with applied Power BI models. The content is intended for learning, reference, and portfolio evaluation.
 
 ---
-
-*All files are developed and validated using Microsoft Power BI.*
 
