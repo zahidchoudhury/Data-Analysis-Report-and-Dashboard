@@ -1,6 +1,6 @@
 # Data Analysis Reports and Dashboards
 
-This repository showcases my professional skill set in **data analysis, report development, and dashboard creation** across multiple industries. The work spans **basic to advanced-level analytics**, focusing on translating raw data into meaningful insights for technical teams, business users, and management stakeholders.
+This repository showcases my professional skill set in **data analysis, report development, and dashboard creation** across multiple industries. The work spans **basic to advanced-level analytics**, focusing on translating raw data into meaningful insights for technical teams, business, finance, management stakeholders.
 
 ## Skills Demonstrated
 
@@ -21,6 +21,7 @@ The objective is to systematically cover **every possible analytical perspective
 - **Business analysis** (sales, operations, finance, customer insights)
 - **Industry-oriented reporting** (domain-specific KPIs and benchmarks)
 - **Management and executive reporting** (strategic dashboards and summaries)
+- **And More**
 
 > **Status:** WORK IN PROGRESS  
 New reports, dashboards, datasets, and analytical scenarios will be added incrementally.
@@ -33,3 +34,4 @@ New reports, dashboards, datasets, and analytical scenarios will be added increm
 ---
 
 *This repository is intended as both a learning resource and a professional analytics portfolio.*
+
