@@ -109,7 +109,136 @@ Reseller without Postal Code (CM) = COUNTBLANK(Reseller[Postal Code])
 ```
 <img width="542" height="119" alt="image" src="https://github.com/user-attachments/assets/11d12c9a-7263-4342-b1fd-910f8c66bb4d" />
 <p align = "center"> <img width="922" height="437" alt="image" src="https://github.com/user-attachments/assets/8abc9af8-7211-4853-97aa-98bdaace7522" /></p>
+---
 
+## 📄 Row Context
+
+- **What it is:**  
+  Row context means that when DAX evaluates an expression, it looks at one row at a time.
+
+- **Where it happens:**  
+  - In calculated columns → each row is evaluated separately.  
+  - In iterators (like `FILTER()`, `SUMX()`, `AVERAGEX()`, `ADDCOLUMNS()`) → the function goes row by row through a table, creating a row context for each row.  
+
+- **Important to know:**  
+  - Row context does not automatically follow relationships between tables.  
+  - Row context does not create a filter context by itself.  
+  - To turn row context into filter context, you need special functions (like `CALCULATE`).  
+
+- **Measures vs. Row Context:**  
+  - Calculated columns and iterators have row context.  
+  - Regular measures do not have row context because they work on entire columns/tables, not individual rows.  
+  - If you want row-by-row evaluation inside a measure, you must use an iterator (like `SUMX`).  
+
+✅ **In short:**  
+Row context = *“DAX is looking at one row at a time.”*  
+It exists in calculated columns and iterators, but not in regular measures unless you use an iterator.
+
+---
+
+## 📄 Filter Context
+
+- **What it is:**  
+  Filter context means the set of filters applied to your data model when DAX evaluates an expression.  
+  It defines which rows of data are visible at the time of calculation.
+
+- **Where it comes from (initial filter context):**  
+  ✔ Slicers on a report  
+  ✔ Fields in visuals (e.g., rows and columns in a Matrix)  
+  ✔ Page or report filters  
+  ✔ Other visuals that cross-filter  
+
+- **How it behaves:**  
+  - Filters automatically follow relationships in the data model (from the “one” side to the “many” side).  
+  - You can modify or replace filter context using the `CALCULATE()` function, which changes the filters before evaluating the expression.  
+
+✅ **In short:**  
+Filter context = *“Which rows are included in the calculation.”*  
+It comes from slicers, visuals, and filters, and can be changed with `CALCULATE()`.
+
+---
+## Initial or incoming filter context
+<img width="448" height="381" alt="image" src="https://github.com/user-attachments/assets/2920ddaf-8387-496c-8c56-dd978eef2a74" /><img width="491" height="367" alt="image" src="https://github.com/user-attachments/assets/26344c4b-0b77-4318-8017-5217e7e4d442" />
+
+**The Unit price discount was applicable for purchases through resellers only**
+---
+
+## 📄 Evaluation Context in Functions
+
+Different DAX functions change or use evaluation context in specific ways.  
+Here are some common examples:
+
+- **RELATED()** → Expands the current row context to bring in values from another table (like a VLOOKUP).  
+- **FILTER()** → Creates a new filter context by selecting only a subset of rows that meet certain conditions.  
+- **ALL()** → Removes all filters, so calculations are done on the entire table or column.  
+- **ALLEXCEPT()** → Removes all filters except the ones you specify, letting you keep certain filters while ignoring others.  
+- **EARLIER() / EARLIEST()** → Used in calculated columns to reference values from an outer row context when working inside nested row evaluations (like looping through rows).  
+
+✅ **In short:**  
+Evaluation context defines *how DAX interprets row and filter contexts together*.  
+Functions like `RELATED`, `FILTER`, `ALL`, and `CALCULATE` allow you to **modify or extend context** to achieve more complex calculations.
+
+---
+## RELATED()
+```DAX
+Current List Price (CC) = RELATED('Product'[List Price])
+ ```
+<img width="900" height="459" alt="image" src="https://github.com/user-attachments/assets/fa443312-3bb1-4d79-b370-70aa3b9f8ded" />
+## Relatedtable()
+```DAX
+No of Sales (CC) = COUNTROWS(RELATEDTABLE(Sales))
+```
+<img width="823" height="420" alt="image" src="https://github.com/user-attachments/assets/d10e2143-557e-4f7c-a0df-897b83bdca24" /><img width="678" height="203" alt="image" src="https://github.com/user-attachments/assets/771787e9-2b88-49d4-858b-e4b5d9dd1a49" />
+
+## DISTINCTCOUNT()
+```DAX
+No of Sales (CC) = COUNTROWS(RELATEDTABLE(Sales))
+Last Order Date (CC) = CALCULATE(MAX(Sales[OrderDate]))
+No of Product purchased (CC) = DISTINCTCOUNT(Sales[ProductKey])
+No of Product purchased CAL (CC) = CALCULATE(DISTINCTCOUNT(Sales[ProductKey]))
+```
+## VALUE()
+```DAX
+Testing _CT _ VALUES_ Product (CT) = VALUES('Product') // Whole Table
+```
+<img width="975" height="132" alt="image" src="https://github.com/user-attachments/assets/e446ae38-b205-4bd1-b81a-c069e0a555ac" />
+
+
+```DAX
+Testing _CT _ VALUES_ Product (CT) = VALUES('Product'[Category])  // Specific Column
+```
+<img width="831" height="234" alt="image" src="https://github.com/user-attachments/assets/c85424b9-3e62-4ed7-8d10-8fc5a6995e9a" />
+
+### Distinct
+```DAX
+Testing _CT _ VALUES_ Product (CT) = DISTINCT('Product'[Category])
+```
+<img width="909" height="298" alt="image" src="https://github.com/user-attachments/assets/f2de86dd-e6f5-4848-b14e-73f853eb6316" />
+
+### ALL()
+```DAX
+Testing _CT _ VALUES_ Product (CT) = ALL('Product'[Category])
+```
+<img width="827" height="242" alt="image" src="https://github.com/user-attachments/assets/6169c8dc-b527-421e-ae0f-f1552cdce235" />
+
+### ALL() – 2 Column
+```DAX
+Testing _CT _ VALUES_ Product -2 COL (CT) = ALL('Product'[Category], 'Product'[Subcategory])
+```
+<img width="975" height="717" alt="image" src="https://github.com/user-attachments/assets/af45ea5b-f6da-4faa-9cc5-fbca8d1aa223" />
+
+### ERROR
+<img width="975" height="104" alt="image" src="https://github.com/user-attachments/assets/95e89c63-22f5-441c-bf49-3c25e40aab5a" />
+
+### SUMMARIZE()
+```DAX
+Testing _CT _ VALUES_ Product using Summarize(CT) = SUMMARIZE(Sales,'Product'[Category])
+```
+<img width="975" height="256" alt="image" src="https://github.com/user-attachments/assets/708d8013-5599-4963-8545-839015d052ee" />
+
+```DAX
+Testing _CT _ VALUES_ Product using Summarize -2 COL(CT) = SUMMARIZE(Sales,'Product'[Category],'Product'[Subcategory])
+```
 
 
 
