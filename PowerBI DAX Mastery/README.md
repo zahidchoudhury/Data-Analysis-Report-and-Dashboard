@@ -36,8 +36,14 @@ The purpose of this folder is to provide a structured, real-world demonstration 
 <img width="902" height="667" alt="image" src="https://github.com/user-attachments/assets/652d922d-d931-4432-8190-80088af2b05f" />
 
 ### Calculated Column: 
-''' DAX
-Profit (CC) = Sales[Sales Amount]-Sales[Total Product Cost]
-Profit Margin (CC) = Sales[Profit (CC)]/Sales[Sales Amount]
+## Calculated Columns
+
+```DAX
+Profit (CC) = Sales[Sales Amount] - Sales[Total Product Cost]
+```DAX
+Profit Margin (CC) = Sales[Profit (CC)] / Sales[Sales Amount]
+
+
+<img width="828" height="725" alt="image" src="https://github.com/user-attachments/assets/6ebc95d2-1238-4b2b-b201-7bca4d807ae1" />
 
 
