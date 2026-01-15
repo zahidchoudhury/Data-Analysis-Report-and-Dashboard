@@ -231,17 +231,21 @@ Testing _CT _ VALUES_ Product -2 COL (CT) = ALL('Product'[Category], 'Product'[S
 <img width="975" height="104" alt="image" src="https://github.com/user-attachments/assets/95e89c63-22f5-441c-bf49-3c25e40aab5a" />
 
 ### SUMMARIZE()
+
 ```DAX
 Testing _CT _ VALUES_ Product using Summarize(CT) = SUMMARIZE(Sales,'Product'[Category])
 ```
+
 <img width="975" height="256" alt="image" src="https://github.com/user-attachments/assets/708d8013-5599-4963-8545-839015d052ee" />
 
 ```DAX
 Testing _CT _ VALUES_ Product using Summarize -2 COL(CT) = SUMMARIZE(Sales,'Product'[Category],'Product'[Subcategory])
 ```
+
 <img width="975" height="531" alt="image" src="https://github.com/user-attachments/assets/300718f8-5802-4344-8ceb-d2f70cb4766d" />
 
 ## SUMMARIZE() using measure or expression for GroupBy
+
 ```DAX
 Testing _CT _ VALUES_ Product using Summarize -using Measures(CT) = 
 SUMMARIZE(
@@ -252,6 +256,7 @@ SUMMARIZE(
 "Total Cost", SUM(Sales[Total Product Cost])
 )
 ```
+
 <img width="933" height="838" alt="image" src="https://github.com/user-attachments/assets/06863842-6584-4fc0-b4a7-5d4a2fb822ce" />
 
 ### SUMMARIZE() to get data for all categories:
@@ -264,9 +269,11 @@ SUMMARIZE(
 )
 ```
 <img width="852" height="872" alt="image" src="https://github.com/user-attachments/assets/c567f3a2-ba14-4ed4-adee-97c252d59b15" />
+
 ```DAX
 Total Sales Amount (CM) = SUM(Sales[Sales Amount])
  ```
+
 ```DAX
 Testing _CT _ VALUES_ Product using Summarize -all category(CT) = 
 SUMMARIZE(
@@ -276,22 +283,27 @@ SUMMARIZE(
 "SALES", [Total Sales Amount (CM)]
 )
 ```
+
 <img width="880" height="852" alt="image" src="https://github.com/user-attachments/assets/50ff0f37-7993-447a-8a22-baab23f4f768" />
 
 ### ALLEXCEPT
+
 ```DAX
 Testing _CT _ VALUES_ Product using ALLEXCEPT = ALLEXCEPT('Product', 'Product'[ProductKey])
 ```
+
 <img width="975" height="601" alt="image" src="https://github.com/user-attachments/assets/df20c6ca-9f39-4fd0-86c1-4bc9fac29e0d" />
 
 ### FILTER()
 ```DAX
 Testing_CT_Product using Fiter (CT) = FILTER('Product', 'Product'[Category] = "Accessories")
 ```
+
 <img width="975" height="588" alt="image" src="https://github.com/user-attachments/assets/1ebb4ab2-9b95-4d44-935c-cc5a6109f9e9" />
 
 
-### Multiple Filter:
+## Multiple Filter:
+
 ```DAX
 Testing_CT_Product using Fiter (CT) = 
 FILTER('Product', 
@@ -300,19 +312,23 @@ FILTER('Product',
 )
 ```
 
+
 <img width="975" height="581" alt="image" src="https://github.com/user-attachments/assets/3ad94bd3-c71d-4416-b13a-c491978a75cd" />
 
 
 ### Virtual table lineage (CM)
+
 ```DAX
 Imaginary Table of customer with sales greater than $5000 = 
 CALCULATE( COUNTROWS(Customer),
 FILTER(Customer,[Total Sales Amount (CM)]>5000)
 )
 ```
+
 <img width="816" height="555" alt="image" src="https://github.com/user-attachments/assets/73193144-e624-4a6f-b30e-2b59ff9adc51" />
 
 ### CT
+
 ```DAX
 Imaginary_Customer_Sales_Above5000 = 
 FILTER (
@@ -320,9 +336,11 @@ FILTER (
    [Total Sales Amount (CM)] >= 5000
 )
 ```
+
 <img width="975" height="539" alt="image" src="https://github.com/user-attachments/assets/3f0bd3ef-6252-408e-a1e5-f7f550a3ac34" />
 
 ### Mixing_TAB_Filter_ALL (CT)
+
 ```DAX
 Mixing_TAB_Filter_ALL = 
 FILTER (
@@ -350,11 +368,13 @@ FILTER(
 <img width="667" height="498" alt="image" src="https://github.com/user-attachments/assets/df1fa661-70a1-4bc6-86bd-c55ce74a46f5" />
 
 ### CROSS JOIN(tablee1,table2)
+
 ```DAX
 Testing_Cross_Join (CT) = CROSSJOIN(Customer,'Product')
 ```
 
 <img width="975" height="327" alt="image" src="https://github.com/user-attachments/assets/3d48e468-1452-4a7b-a4d3-41bea5b3a99c" />
+
 ```DAX
 Testing_Cross_Join using Values (CT) = CROSSJOIN(VALUES(Customer[City]),VALUES('Product'[Subcategory]))
  ```
@@ -362,6 +382,7 @@ Testing_Cross_Join using Values (CT) = CROSSJOIN(VALUES(Customer[City]),VALUES('
 <img width="975" height="738" alt="image" src="https://github.com/user-attachments/assets/a4527f2b-2ce3-4955-b081-449d0d2e5321" />
 
 ### Summarize, Values, Cross join
+
 ```DAX
 Testing Cross join, Summarize,Values (CT) =
 SUMMARIZE(CROSSJOIN(VALUES(Customer[City]),VALUES('Product'[Subcategory])),
@@ -369,21 +390,27 @@ Customer[City],
 'Product'[Subcategory],
 "Sales", [Total Sales Amount (CM)])
 ```
+
 <img width="939" height="850" alt="image" src="https://github.com/user-attachments/assets/fa4132ac-c5c9-4475-90ff-875297f81bd9" />
 
 ### Testing Table in Measure (CM)
+
 ```DAX
 Testing Table using Measures = COUNTROWS(Values('Product'))
 ```
+
   <img width="292" height="163" alt="image" src="https://github.com/user-attachments/assets/e0b00734-9ef4-4b3f-b50e-9a2d55ae1d4a" /> <img width="317" height="175" alt="image" src="https://github.com/user-attachments/assets/9746a37c-238a-4cd3-9a1e-51786cb9169b" />
 
 ```DAX
 Testing Table using Measures (CM) = COUNTROWS(Values('Product'[Product]))
 ```
+
  <img width="294" height="159" alt="image" src="https://github.com/user-attachments/assets/40b9bc05-a052-4e54-87ef-4f759baf40b0" />
+ 
 ```DAX
 Testing Table using Measures (CM) = COUNTROWS(Values('Product'[Subcategory]))
 ```
+
  <img width="600" height="367" alt="image" src="https://github.com/user-attachments/assets/10adea50-2d1d-4cae-bd80-8edb393e5142" />
 
 ```DAX
@@ -397,15 +424,21 @@ Testing Table using Measures (CM) = COUNTROWS(ALL('Product'[Subcategory]))
  ```
 
 <img width="472" height="309" alt="image" src="https://github.com/user-attachments/assets/29c452da-ce2c-40d9-88fd-be656394db39" />
+
 ```DAX
 Testing Table using Measures (CM) = COUNTROWS(ALL('Product'[Category]))
 ```
+
 <img width="472" height="309" alt="image" src="https://github.com/user-attachments/assets/54d4b74b-de20-449a-9b75-d62096495c77" />
+
 ```DAX
 Testing Table using Measures (CM) = COUNTROWS(ALL('Product'[Category]))
  ```
+
 <img width="438" height="288" alt="image" src="https://github.com/user-attachments/assets/4531f664-cf54-4b74-b410-25782d9a2803" />
+
 ### VALUES(), DISTINCT(), ALL() and ALLNOBLANKROW()
+
 ```DAX
 CountRows using VAlUE (CM) = COUNTROWS(VALUES('Product'))
 
@@ -415,15 +448,20 @@ CountRows using ALL (CM) = COUNTROWS(ALL('Product'))
 
 CountRows using ALLNOBLANK (CM) = COUNTROWS(ALLNOBLANKROW('Product'))
 ```
+
 <img width="975" height="231" alt="image" src="https://github.com/user-attachments/assets/f225aa5a-2b0a-449f-b8dd-6c0ba69571b7" />
-### Variables and Comments in DAX
+
+### Variables and Comments in DAX:
+
 ```DAX
 Testing Variables (CM) = 
 VAR TotalQuantity = SUM(Sales[Order Quantity])
 RETURN
 TotalQuantity
 ```
+
 <img width="530" height="186" alt="image" src="https://github.com/user-attachments/assets/9415616a-feed-411b-ae83-9368d7abd873" />
+
 ```DAX
 Testing Variables (CM) = 
 VAR TotalQuantity = SUM(Sales[Order Quantity])
@@ -432,6 +470,7 @@ IF(TotalQuantity >1000, TotalQuantity*0.95, TotalQuantity*1.25)
 ```
 
 <img width="663" height="355" alt="image" src="https://github.com/user-attachments/assets/580239c3-3c6b-4975-a69a-db8c0276b697" /><img width="692" height="523" alt="image" src="https://github.com/user-attachments/assets/f9380cd0-4987-4c67-8f0c-11bcce6befe8" />
+
 ```DAX
 No of Premium Bikes (CM) = 
 VAR PremiumBikeListPrice = 3000
@@ -444,16 +483,21 @@ COUNTROWS(PremiumBikeCategoryProducts)
 ```
 
 <img width="808" height="466" alt="image" src="https://github.com/user-attachments/assets/62c267c0-62d6-4135-bcc3-d7917efe12c5" /><img width="833" height="517" alt="image" src="https://github.com/user-attachments/assets/d04681c3-d1f1-45cb-8494-174bfef2fce2" />
+
 ### Iterators
+
 ```DAX
 Discount Amount (CM) = 
 SUMX(Sales,Sales[Unit Price Discount Pct] * Sales[Extended Amount])
 ```
+
 ```DAX
 Discount Amount Wrong (CM) = 
 SUM(Sales[Unit Price Discount Pct]) * SUM(Sales[Extended Amount])
 ```
+
 <img width="758" height="441" alt="image" src="https://github.com/user-attachments/assets/0e6c3ccb-e5b7-4909-a6ff-490d5a69e6df" />
+
 ```DAX
 Discount Amount Large Sales (CM) = 
  VAR LargeSalesTable =
@@ -472,6 +516,7 @@ AVERAGEX(Sales, Sales[DeliveryDate]-Sales[OrderDate])
 
 
 <img width="636" height="302" alt="image" src="https://github.com/user-attachments/assets/2bf38333-335d-4634-9089-9ec6bcbe4179" /> <img width="652" height="353" alt="image" src="https://github.com/user-attachments/assets/5ca452c0-2fc5-4465-bf9e-772d38d95cbf" />
+
 ```DAX
 Bonus Amount (CM) = 
 SUMX (
@@ -485,6 +530,7 @@ SUMX (
 ```
 
 <img width="647" height="467" alt="image" src="https://github.com/user-attachments/assets/cc1dc0b5-9a5b-499d-8980-bac8bad4c2c5" />
+
 ## MINX(), MAXX()
 ```DAX
 Minimum Sales Per Customer (CC) = MINX(RELATEDTABLE(Sales),Sales[Sales Amount])
@@ -547,6 +593,7 @@ KEEPFILTERS(SalesTerritory[Country] = "Australia"))
 
  
 ### Multiple Filter 
+
 ````DAX
 F_Sales in AUS & CAN = 
 CALCULATE([Total Sales Amount (CM)],
@@ -564,6 +611,7 @@ KEEPFILTERS(SalesTerritory[Country] = "Australia" || SalesTerritory[Country] = "
 <img width="933" height="402" alt="image" src="https://github.com/user-attachments/assets/6334394d-db1a-4fb7-a6bf-1b105adfa043" /><img width="975" height="193" alt="image" src="https://github.com/user-attachments/assets/fc52f4a4-68b4-4f82-8c56-fbe03909a030" />
 
 ### IN Keyword
+
 ```DAX
 F_Sales in AUS & CAN & UK(CM) = 
 CALCULATE([Total Sales Amount (CM)],
@@ -573,7 +621,8 @@ SalesTerritory[Country] IN { "Australia", "Canada", "United Kingdom"}
 
 <img width="975" height="318" alt="image" src="https://github.com/user-attachments/assets/be036a66-c7c2-4b04-baed-0e7940c5a46d" />
 
-### Using Filter with Cslculate
+### Using Filter with Calculate
+
 ```DAX
 I_Sales when Discount > 500 (CM) = 
 CALCULATE([Total Sales Amount (CM)],
@@ -586,7 +635,9 @@ FILTER(Sales,[Discout Amount (CM)] > 500)
 ```DAX
 ALL Sales Amount (CM) = CALCULATE([Total Sales Amount (CM)],ALL(SalesTerritory[Country]))
 ```
+
 <img width="928" height="258" alt="image" src="https://github.com/user-attachments/assets/f125f761-499a-4ecd-9842-59939f7bbb2c" />
+
 ```DAX
 A_ RM Sales Amount (CM) = CALCULATE([Total Sales Amount (CM)],REMOVEFILTERS(SalesTerritory[Country]))
 ```
