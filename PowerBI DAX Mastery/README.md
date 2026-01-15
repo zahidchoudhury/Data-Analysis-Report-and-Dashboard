@@ -44,4 +44,6 @@ Profit Margin (CC) = Sales[Profit (CC)] / Sales[Sales Amount]
 
 <img width="828" height="725" alt="image" src="https://github.com/user-attachments/assets/6ebc95d2-1238-4b2b-b201-7bca4d807ae1" />
 
+## Date Table
+![Uploading image.png…]()
 
