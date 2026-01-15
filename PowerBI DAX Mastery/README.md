@@ -142,3 +142,266 @@ This portfolio serves as:
 * A **professional showcase** of Power BI expertise
 * A **practical demonstration** of analytical thinking and BI solution design
 
+
+---
+
+A practical, categorized reference of **commonly used and high-impact DAX functions and patterns**, covering fundamentals through advanced analytical scenarios.
+
+---
+
+## Data Modeling Basics
+
+### Calculated Column vs Measure
+
+```DAX
+-- Calculated Column (row context)
+Profit (CC) = Sales[Sales Amount] - Sales[Total Product Cost]
+
+-- Measure (filter context)
+Profit (CM) =
+SUM(Sales[Sales Amount]) - SUM(Sales[Total Product Cost])
+```
+
+---
+
+## Aggregation Functions
+
+```DAX
+SUM(Sales[Sales Amount])
+AVERAGE(Sales[Unit Price])
+MIN(Sales[Order Quantity])
+MAX(Sales[Order Quantity])
+```
+
+---
+
+## Counting Functions
+
+```DAX
+COUNT(Product[ProductKey])
+COUNTROWS(Sales)
+DISTINCTCOUNT(Sales[CustomerKey])
+COUNTBLANK(Customer[Postal Code])
+```
+
+---
+
+## Iterator Functions (Row-by-Row)
+
+```DAX
+SUMX(Sales, Sales[Order Quantity] * Sales[Unit Price])
+
+AVERAGEX(
+    Sales,
+    Sales[DeliveryDate] - Sales[OrderDate]
+)
+```
+
+---
+
+## Filter Context & CALCULATE
+
+```DAX
+CALCULATE(
+    [Total Sales Amount],
+    SalesTerritory[Country] = "Australia"
+)
+
+CALCULATE(
+    [Total Sales Amount],
+    SalesTerritory[Country] IN {
+        "Australia", "Canada", "United Kingdom"
+    }
+)
+```
+
+---
+
+## Filtering Functions
+
+```DAX
+FILTER(
+    Product,
+    Product[Category] = "Accessories"
+)
+
+FILTER(
+    Product,
+    Product[List Price] > 100
+)
+```
+
+---
+
+## ALL, ALLEXCEPT, REMOVEFILTERS
+
+```DAX
+CALCULATE(
+    [Total Sales Amount],
+    ALL(Product)
+)
+
+CALCULATE(
+    [Total Sales Amount],
+    ALLEXCEPT(Product, Product[Category])
+)
+
+CALCULATE(
+    [Total Sales Amount],
+    REMOVEFILTERS(SalesTerritory[Country])
+)
+```
+
+---
+
+## VALUES, DISTINCT, ALLSELECTED
+
+```DAX
+VALUES(Product[Category])
+DISTINCT(Customer[City])
+
+CALCULATE(
+    [Total Sales Amount],
+    ALLSELECTED(Product)
+)
+```
+
+---
+
+## Virtual Tables
+
+```DAX
+SUMMARIZE(
+    Sales,
+    Product[Category],
+    "Sales", SUM(Sales[Sales Amount])
+)
+
+CROSSJOIN(
+    VALUES(Customer[City]),
+    VALUES(Product[Subcategory])
+)
+```
+
+---
+
+## Variables (Best Practice)
+
+```DAX
+VAR TotalSales = [Total Sales Amount]
+VAR TotalCost  = [Total Cost Amount]
+RETURN
+    TotalSales - TotalCost
+```
+
+---
+
+## Conditional Logic
+
+```DAX
+IF([Profit] > 0, "Profit", "Loss")
+
+SWITCH(
+    TRUE(),
+    [Profit] > 100000, "High",
+    [Profit] > 50000, "Medium",
+    "Low"
+)
+```
+
+---
+
+## Ranking & Analytics
+
+```DAX
+RANKX(
+    ALL(Customer),
+    [Total Sales Amount]
+)
+
+RANKX(
+    ALLEXCEPT(Customer, Customer[Country]),
+    [Total Sales Amount]
+)
+```
+
+---
+
+## Time Intelligence (Requires Date Table)
+
+```DAX
+TOTALYTD(
+    [Total Sales Amount],
+    'Date'[Date]
+)
+
+SAMEPERIODLASTYEAR('Date'[Date])
+
+DATESINPERIOD(
+    'Date'[Date],
+    MAX('Date'[Date]),
+    -3,
+    MONTH
+)
+```
+
+---
+
+## Running Total Pattern
+
+```DAX
+VAR MaxDate = MAX('Date'[Date])
+RETURN
+CALCULATE(
+    [Total Sales Amount],
+    FILTER(
+        ALL('Date'),
+        'Date'[Date] <= MaxDate
+    )
+)
+```
+
+---
+
+## Context Detection
+
+```DAX
+HASONEVALUE(Product[Category])
+ISINSCOPE(Product[Subcategory])
+```
+
+---
+
+## Hierarchies (Parent–Child)
+
+```DAX
+PATH(Employees[EmployeeID], Employees[ManagerID])
+PATHLENGTH(Employees[HierarchyPath])
+PATHITEM(Employees[HierarchyPath], 2)
+```
+
+---
+
+## Text Functions
+
+```DAX
+CONCATENATE(Customer[FirstName], Customer[LastName])
+
+CONCATENATEX(
+    VALUES(Product[Category]),
+    Product[Category],
+    ", "
+)
+```
+
+---
+
+## Performance Tips (Quick Reference)
+
+* Prefer **measures over calculated columns**
+* Use **VAR** to avoid repeated calculations
+* Avoid **FILTER inside iterators** when possible
+* Minimize use of **ALL(Table)** on large tables
+* Always use a **proper Date table**
+
+---
