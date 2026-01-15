@@ -41,7 +41,9 @@ In this Power BI project, I managed the full cycle of data modeling and reportin
 ### Calculated Column: 
 
 ```DAX
-Profit (CC) = Sales[Sales Amount] - Sales[Total Product Cost] ```
+Profit (CC) = Sales[Sales Amount] - Sales[Total Product Cost]
+```
+
 ``` DAX
 Profit Margin (CC) = Sales[Profit (CC)] / Sales[Sales Amount]
 ```
