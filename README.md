@@ -11,6 +11,7 @@ This repository showcases my professional skill set in **data analysis, report d
 - Advanced DAX modeling and optimization
 - Data modeling, relationships, and evaluation context handling
 - Storytelling with data for decision support
+- Included Tableau Worksheet & Dashboard
 
 ## Project Status
 
@@ -26,12 +27,8 @@ The objective is to systematically cover **every possible analytical perspective
 > **Status:** WORK IN PROGRESS  
 New reports, dashboards, datasets, and analytical scenarios will be added incrementally.
 
-## Completed Work
-
-- **PowerBI DAX Formula Analysis – *DAX Mastery***  
-  A comprehensive DAX reference and implementation portfolio covering fundamental to advanced DAX concepts, patterns, and real-world use cases. This module documents formulas, evaluation contexts, filtering techniques, time intelligence, and performance-aware modeling.
-
 ---
 
 *This repository is intended as both a learning resource and a professional analytics portfolio.*
+
 
